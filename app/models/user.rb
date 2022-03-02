@@ -7,5 +7,8 @@ class User < ActiveRecord::Base
   
   extend Enumerize
   enumerize :roll, in: [:general => 0, :admin => 1]
+
+  has_many :orders
+  has_many :books, through: :orders
 end
 
