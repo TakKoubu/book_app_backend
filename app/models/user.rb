@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
   
   extend Enumerize
-  enumerize :roll, in: [:general => 0, :admin => 1]
+  enumerize :role, in: [:general, :admin]
 
   has_many :orders
   has_many :books, through: :orders

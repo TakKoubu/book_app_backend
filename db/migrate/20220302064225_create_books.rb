@@ -6,7 +6,6 @@ class CreateBooks < ActiveRecord::Migration[6.0]
       t.date :publication_date
       t.integer :stock
       t.integer :price
-      t.string :image
 
       t.timestamps
     end
