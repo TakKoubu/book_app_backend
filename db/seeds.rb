@@ -15,7 +15,7 @@ book4.image.attach(io: File.open(Rails.root.join('../../book_app/backend/assets/
 book5 = Book.create!(id: 5, name: 'Python基礎&実践プログラミング', author: 'Magnus Lie Hetland', publication_date: 20200221, stock: 0, price: 3960)
 book5.image.attach(io: File.open(Rails.root.join('../../book_app/backend/assets/images/Python.jpg')), filename: 'Python.jpg')
 
-Category.create!(id: 1, name: 'プログラミング')
+Category.create!(id: 1, parent_id: 0, name: 'プログラミング')
 Category.create!(id: 2, parent_id: 1, name: 'フロントエンド')
 Category.create!(id: 3, parent_id: 1, name: 'バックエンド')
 

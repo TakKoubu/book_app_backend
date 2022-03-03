@@ -1,7 +1,7 @@
 module Api
   class BooksController < ApplicationController
     def index
-      books = Book.all
+      books = Book.ransack(params[:q]).result(distinct: true)
       render json: books
     end
 
