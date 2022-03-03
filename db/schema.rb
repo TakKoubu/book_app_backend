@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 2022_03_02_132724) do
     t.text "tokens"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "role", default: 0, null: false
+    t.string "role", default: "general", null: false
     t.integer "point", default: 0, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
