@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(version: 2022_03_02_132724) do
     t.date "publication_date"
     t.integer "stock"
     t.integer "price"
-    t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
