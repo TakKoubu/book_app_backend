@@ -1,11 +1,17 @@
 module Api
   class CartsController < ApplicationController
     def index
+      carts = current_user.carts
+      render json: carts.to_json(include: [:book])
     end
     
     def create
       cart = current_user.carts.create(cart_params)
-      cart.save
+      if cart.save
+        render json: cart
+      else
+        render json: cart.errors, status: 422
+      end
     end
 
     def destroy
