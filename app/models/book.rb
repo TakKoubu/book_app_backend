@@ -4,4 +4,5 @@ class Book < ApplicationRecord
   has_many :categories, through: :book_categories
 
   has_many :orders, dependent: :destroy
+  has_many :carts, dependent: :destroy
 end
