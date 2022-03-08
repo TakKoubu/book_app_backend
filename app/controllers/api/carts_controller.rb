@@ -14,9 +14,15 @@ module Api
       end
     end
 
-    def destroy
+    def update
       cart = Cart.find(params[:id])
-      cart.destroy
+      cart.update(cart_params)
+      render json: cart.to_json(include: [:book])
+    end
+
+    def destroy
+      carts = current_user.carts
+      carts.destroy
     end
 
     private
