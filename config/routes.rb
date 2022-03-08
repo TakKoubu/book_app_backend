@@ -6,5 +6,6 @@ Rails.application.routes.draw do
     resources :books, only: [:index, :show, :create, :update, :destroy]
     resources :categories, only: [:index]
     resources :carts, only: [:index, :create, :update, :destroy]
+    resource :carts, only: [:destroy]
   end
 end

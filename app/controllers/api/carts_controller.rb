@@ -21,8 +21,6 @@ module Api
     end
 
     def destroy
-      carts = current_user.carts
-      carts.destroy
     end
 
     private
