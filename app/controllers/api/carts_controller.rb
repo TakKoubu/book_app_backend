@@ -8,13 +8,15 @@ module Api
     def create
       cart = current_user.carts.create(cart_params)
       if cart.save
-        render json: cart
+        render json: cart.to_json(include: [:book])
       else
         render json: cart.errors, status: 422
       end
     end
 
     def destroy
+      cart = Cart.find(params[:id])
+      cart.destroy
     end
 
     private
