@@ -21,6 +21,9 @@ module Api
     end
 
     def destroy
+      carts = current_user.carts
+      binding.pry
+      carts.destroy!
     end
 
     private
