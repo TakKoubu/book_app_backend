@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'order_details/create'
   devise_for :users
 
   namespace :api do
@@ -6,6 +7,7 @@ Rails.application.routes.draw do
     resources :books, only: [:index, :show, :create, :update, :destroy]
     resources :categories, only: [:index]
     resources :carts, only: [:index, :create, :update, :destroy]
-    resource :carts, only: [:destroy]
+    resources :orders, only: [:create]
+    resources :order_details, only: [:create]
   end
 end
