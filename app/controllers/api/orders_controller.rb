@@ -1,18 +1,30 @@
 module Api
   class OrdersController < ApplicationController
     def create
-      order = current_user.orders.build(order_params)
-      current_user.carts.destroy
-      if order.save
-        render json: order.to_json(include:[:book])
+      current_user.carts.each do |cart|
+        # orderを作成する
+        @order = current_user.orders.build(user_id: current_user.id)
+        # order_detailsを作成する
+        @order.order_details.build(
+          book_id: cart.book_id,
+          item_number: cart.item_number,
+          item_price: cart.book.price,
+          point: ((cart.book.price * 1.1 ).floor * cart.item_number * 0.1).floor
+        )
+      end
+      # cartの中身を削除
+      current_user.carts.destroy_all
+
+      if @order.save
+        render json: @order
       else
-        render json: order.errors, status: 422
+        render json: @order.errors, status: 422
       end
     end
 
     private
-      def cart_params
-        params.require(:order).permit(:book_id, :item_number, :price, :point)
+      def order_params
+        params.require(:order).permit(:user_id)
       end
   end
 end

@@ -11,6 +11,5 @@ class User < ActiveRecord::Base
   has_many :carts
   has_many :cart_books, through: :carts
 
-  has_many :order_details
-  has_many :order_books, through: :order_details
+  has_many :orders
 end
