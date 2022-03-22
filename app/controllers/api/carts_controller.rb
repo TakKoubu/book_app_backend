@@ -20,9 +20,6 @@ module Api
       render json: cart.to_json(include: [:book])
     end
 
-    def destroy
-    end
-
     private
       def cart_params
         params.require(:cart).permit(:book_id, :item_number)

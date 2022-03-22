@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_04_015532) do
+ActiveRecord::Schema.define(version: 2022_03_09_014139) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -71,16 +71,23 @@ ActiveRecord::Schema.define(version: 2022_03_04_015532) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "user_id", null: false
+  create_table "order_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "order_id", null: false
     t.bigint "book_id", null: false
     t.integer "item_number"
     t.string "item_price"
     t.integer "point"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["book_id"], name: "index_orders_on_book_id"
-    t.index ["user_id", "book_id"], name: "index_orders_on_user_id_and_book_id"
+    t.index ["book_id"], name: "index_order_details_on_book_id"
+    t.index ["order_id", "book_id"], name: "index_order_details_on_order_id_and_book_id", unique: true
+    t.index ["order_id"], name: "index_order_details_on_order_id"
+  end
+
+  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -121,6 +128,7 @@ ActiveRecord::Schema.define(version: 2022_03_04_015532) do
   add_foreign_key "book_categories", "categories"
   add_foreign_key "carts", "books"
   add_foreign_key "carts", "users"
-  add_foreign_key "orders", "books"
+  add_foreign_key "order_details", "books"
+  add_foreign_key "order_details", "orders"
   add_foreign_key "orders", "users"
 end
